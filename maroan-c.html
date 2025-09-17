@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>مروان جول - متجر القمصان الرياضية</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <!-- Google Font (Arabic) -->
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --primary:#0d6efd; /* default */
+      --brand:#d63384; /* مروان جول color (يمكن تغييره) */
+      --accent:#ffb703;
+      --card-radius:14px;
+    }
+    html,body{font-family: 'Cairo', sans-serif;background:#f7f9fb;color:#222}
+    /* NAV */
+    .navbar-brand{font-weight:900;font-size:1.25rem;color:var(--brand)!important}
+    .nav-icons .bi{font-size:1.25rem}
+
+    /* HERO */
+    .hero-carousel .carousel-item{height:420px}
+    .hero-card{background:linear-gradient(90deg, rgba(0,0,0,0.35), rgba(0,0,0,0.2));height:100%;display:flex;align-items:center;border-radius:18px;padding:20px}
+    .hero-card img{max-height:360px;border-radius:12px}
+    .hero-text h2{font-size:2rem;color:#fff}
+    .hero-text p{color:#f0f0f0}
+
+    /* small category tiles */
+    .category-chip{display:inline-flex;align-items:center;gap:.5rem;padding:.55rem .9rem;border-radius:999px;background:#fff;border:1px solid rgba(0,0,0,.05);box-shadow:0 1px 4px rgba(0,0,0,.03);min-width:90px;justify-content:center;cursor:pointer}
+    .category-chip.active{border-color:var(--brand);box-shadow:0 6px 18px rgba(214,51,132,.12);transform:translateY(-2px)}
+
+    /* category carousel */
+    .cat-card{height:120px;border-radius:12px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700}
+    .cat-title{font-size:1rem}
+
+    /* Product cards */
+    .product-card{border-radius:12px;overflow:hidden;border:1px solid rgba(0,0,0,.06)}
+    .product-card img{object-fit:cover;height:220px;width:100%}
+    .prod-desc{color:#6b6b6b;font-size:.9rem}
+
+    /* Buy buttons colors per category */
+    .btn-buy--euro{background:#0b5ed7;color:#fff;border:0}
+    .btn-buy--euro:hover{opacity:.92}
+    .btn-buy--madrid{background:#003399;color:#fff;border:0}
+    .btn-buy--barca{background:#a50044;color:#fff;border:0}
+    .btn-buy--sa{background:#008a00;color:#fff;border:0}
+
+    /* promo banner */
+    .promo-banner{border-radius:12px;padding:20px;background:linear-gradient(90deg,#fff5e6,#fff);border:1px solid rgba(0,0,0,.04);display:flex;align-items:center;justify-content:space-between}
+
+    /* footer */
+    footer{background:#0f1724;color:#e6eef8;padding:30px 0;margin-top:40px} footer a{color:#cfe9ff} 
+    footer a{color:#fff}
+
+    /* responsiveness tweaks */
+    @media (max-width:768px){
+      .hero-carousel .carousel-item{height:320px}
+      .hero-card{flex-direction:column;text-align:center}
+      .hero-card img{max-height:200px}
+    }
+
+    .castom-1 {
+        position: absolute;
+        top: 178px;
+        bottom: 0;
+        z-index: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 11%;
+        padding: 0;
+        height: 18rem;
+        color: #fff;
+        text-align: center;
+        background: 0 0;
+        border: 0;
+        opacity: .5;
+        transition: opacity .15s ease;
+    }
+
+    /* restored original background images for hero blocks */
+    .bvb{
+      background-image: url('Real-Madrid-Champion_LE_upscale_gentle_x4_light_ai_50.jpg');
+      background-size: cover;
+      background-repeat: no-repeat;
+      border-radius: 1rem;
+    }
+    .bvb2{
+      background-image: url('ooi.jpg');
+      background-size: cover;
+      background-repeat: no-repeat;
+      border-radius: 1rem;
+    }
+    .bvb3{
+      background-image: url('OIP (1).webp');
+      background-size: cover;
+      background-repeat: no-repeat;
+      border-radius: 1rem;
+    }
+
+    .nan{
+      background: linear-gradient(to right, rgba(228, 228, 228, 0), #5b5b71);
+    }
+    .nan2{
+      background: linear-gradient(to right, rgba(228, 228, 228, 0), #953643);
+    }
+    .nan3{
+      background: linear-gradient(to right, rgba(228, 228, 228, 0), #2727c6);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top" style="backdrop-filter: blur(6px);">
+    <div class="container-fluid">
+      <a class="navbar-brand d-flex align-items-center" href="#">
+        <div style="width:42px;height:42px;border-radius:8px;background:linear-gradient(135deg,var(--brand),#ff6b6b);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;margin-left:.5rem">MG</div>
+        <div>
+          <div style="font-weight:900;font-size:1.15rem;color:var(--brand);">مروان جول</div>
+          <small class="text-muted" style="font-size:.7rem">متجر القمصان الرياضية</small>
+        </div>
+      </a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="mainNav">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 align-items-lg-center">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="categoriesMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">التصنيفات</a>
+            <ul class="dropdown-menu" aria-labelledby="categoriesMenu">
+              <li><a class="dropdown-item" href="#categories">الدوري الأوروبي</a></li>
+              <li><a class="dropdown-item" href="#categories">الدوري الأمريكي</a></li>
+              <li><a class="dropdown-item" href="#categories">قمصان سعودية</a></li>
+              
+              <li><a class="dropdown-item" href="#categories">أطفال</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item d-none d-lg-block ms-3">
+            <a class="nav-link" href="#products">المنتجات</a>
+          </li>
+
+          <li class="nav-item d-none d-lg-block ms-3">
+            <a class="nav-link" href="#contact">تواصل معنا</a>
+          </li>
+        </ul>
+
+        <form class="d-flex mx-lg-3" role="search" style="flex:1;max-width:520px">
+          <input class="form-control me-2" type="search" placeholder="ابحث عن قميص، فريق، حجم..." aria-label="Search">
+          <button class="btn btn-outline-secondary" type="submit"><i class="bi bi-search"></i></button>
+        </form>
+
+        <div class="d-flex align-items-center gap-2">
+          <a class="btn btn-sm btn-outline-secondary d-flex align-items-center" href="#"><i class="bi bi-person"></i><span class="d-none d-lg-inline ms-2">حسابي</span></a>
+          <a id="cartBtn" class="btn btn-sm btn-outline-danger d-flex align-items-center position-relative" href="#">
+            <i class="bi bi-cart3"></i>
+            <span id="cartCount" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">0</span>
+            <span class="d-none d-lg-inline ms-2">السلة</span>
+          </a>
+          <a class="btn btn-sm btn-primary d-flex align-items-center" href="#">
+            <i class="bi bi-bag-heart-fill"></i>
+            <span class="d-none d-lg-inline ms-2">اضف الى السلة</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO CAROUSEL (restored to original shape) -->
+  <div class="container mt-4">
+    <button class="castom-1 carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+        <span class="bi bi-chevron-left" aria-hidden="true" style="color: black; font-size: 3rem;"></span>
+        <span class="visually-hidden">السابق</span>
+      </button>
+    <div id="heroCarousel" class="carousel slide hero-carousel" data-bs-ride="false" data-bs-interval="false">
+      <div class="carousel-inner">
+
+        <div class="carousel-item active bvb">
+          <div class="hero-card p-3 shadow-sm nan">
+            <div class="row w-100 align-items-center">
+              <div class="col-lg-6 hero-text">
+                <h2>أجود قمصان الفرق العالمية</h2>
+                <p>اكتشف تشكيلتنا الأصلية من أرقام واسماء اللاعبين. توصيل سريع داخل السعودية.</p>
+                <div class="d-flex gap-2">
+                  <button class="btn btn-light">تفاصيل المنتج</button>
+                  <button class="btn btn-dark hero-cta">اضف الى السلة</button>
+                </div>
+              </div>
+              <div class="col-lg-6 text-center">
+                <img src="b3-removebg-preview.png" alt="قميص" class="img-fluid" style="filter: drop-shadow(11px 5px 2px rgba(0,0,0,0.5));">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="carousel-item bvb2">
+          <div class="hero-card p-3 shadow-sm nan2">
+            <div class="row w-100 align-items-center">
+              <div class="col-lg-6 hero-text">
+                <h2>تشكيلة الدوري الأوروبي</h2>
+                <p>احصل على قميص فريقك المفضل بجودة عالية وتفاصيل دقيقة.</p>
+                <div class="d-flex gap-2">
+                  <button class="btn" style="background-color: #2f3544; color: white;">تفاصيل</button>
+                  <button class="btn" style="background-color: white; color: #2f3544;">عرض خاص</button>
+                </div>
+              </div>
+              <div class="col-lg-6 text-center">
+                <img src="b5-removebg-preview.png" alt="قميص" class="img-fluid" style="filter: drop-shadow(11px 5px 2px rgba(0,0,0,0.5));">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="carousel-item bvb3">
+          <div class="hero-card p-3 shadow-sm nan3">
+            <div class="row w-100 align-items-center">
+              <div class="col-lg-6 hero-text">
+                <h2>قمصان سعودية وفرق المنطقة</h2>
+                <p>موديلات رياضية مصممة خصيصاً للمناخ في السعودية.</p>
+                <div class="d-flex gap-2">
+                  <button class="btn btn-light">المزيد</button>
+                  <button class="btn" style="background-color: #192f68; color: white;">اشتري مع خصم</button>
+                </div>
+              </div>
+              <div class="col-lg-6 text-center">
+                <img src="b4-removebg-preview.png" alt="قميص" class="img-fluid" style="filter: drop-shadow(11px 5px 2px rgba(0,0,0,0.5));">
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="carousel-indicators mt-3">
+        <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active"></button>
+        <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1"></button>
+        <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2"></button>
+      </div>
+
+    </div>
+          <!-- controls & indicators -->
+      <button class="castom-1 carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next" >
+        <span class="bi bi-chevron-right" aria-hidden="true" style="color: black; font-size: 3rem;"></span>
+        <span class="visually-hidden">التالي</span>
+      </button>
+  </div>
+
+
+  <!-- CATEGORIES (large colored cards carousel) -->
+  <section class="container mt-5" id="categories">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h3>تصنيفات رئيسية</h3>
+    </div>
+
+    <div id="catCarousel" class="carousel slide" data-bs-ride="false" data-bs-interval="false">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <div class="row g-3">
+            <div class="col-md-4">
+              <div class="cat-card p-3 shadow" style="background:linear-gradient(120deg,#1b00a5,#6e50d9)">
+                <div class="text-center">
+                  <div class="cat-title">الدوري الأوروبي</div>
+                  <div style="font-size:.9rem;opacity:.9">ريال مدريد، برشلونة، مانشستر وغيرها</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="cat-card p-3 shadow" style="background:linear-gradient(120deg,#a50044,#d6336c)">
+                <div class="text-center">
+                  <div class="cat-title">فرق مشهورة</div>
+                  <div style="font-size:.9rem;opacity:.9">أشهر الأندية العالمية</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="cat-card p-3 shadow" style="background:linear-gradient(120deg,#008a00,#00b24a)">
+                <div class="text-center">
+                  <div class="cat-title">قمصان سعودية</div>
+                  <div style="font-size:.9rem;opacity:.9">الأندية المحلية والتشكيلات الخاصة</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="carousel-item">
+          <div class="row g-3">
+            <div class="col-md-4">
+              <div class="cat-card p-3 shadow" style="background:linear-gradient(120deg,#6f42c1,#8a63d9)">
+                <div class="text-center">
+                  <div class="cat-title">الدوري الأمريكي</div>
+                  <div style="font-size:.9rem;opacity:.9">MLS والموديلات الخاصة</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="cat-card p-3 shadow" style="background:linear-gradient(120deg,#ff7b00,#ff9a3d)">
+                <div class="text-center">
+                  <div class="cat-title">فريق محدد</div>
+                  <div style="font-size:.9rem;opacity:.9">ابحث باسم الفريق هنا</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="cat-card p-3 shadow" style="background:linear-gradient(120deg,#00a6ff,#3bd5ff)">
+                <div class="text-center">
+                  <div class="cat-title">خامات خاصة</div>
+                  <div style="font-size:.9rem;opacity:.9">أقمشة خفيفة ومقاومة للحر</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="carousel-item">
+          <div class="row g-3">
+            <div class="col-md-4">
+              <div class="cat-card p-3 shadow" style="background:linear-gradient(120deg,#ff3b3b,#ff6b6b)">
+                <div class="text-center">
+                  <div class="cat-title">الأطفال</div>
+                  <div style="font-size:.9rem;opacity:.9">مقاسات للأطفال وتصاميم مرحة</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="cat-card p-3 shadow" style="background:linear-gradient(120deg,#3b7cff,#6bb2ff)">
+                <div class="text-center">
+                  <div class="cat-title">شبابي</div>
+                  <div style="font-size:.9rem;opacity:.9"> احجام ومقاسات لكل الفرق  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="cat-card p-3 shadow" style="background:linear-gradient(120deg,#ffd54f,#ffb74d)">
+                <div class="text-center">
+                  <div class="cat-title">الكلاسيك</div>
+                  <div style="font-size:.9rem;opacity:.9">تشكيلة بألوان هادئة وخامات بسيطة</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <button class="carousel-control-prev" type="button" data-bs-target="#catCarousel" data-bs-slide="prev" style="width: 5%;">
+        <span class="bi bi-chevron-left" aria-hidden="true" style=" font-size: 3rem;"></span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#catCarousel" data-bs-slide="next" style="width: 5%;">
+        <span class="bi bi-chevron-right" aria-hidden="true" style=" font-size: 3rem;"></span>
+      </button>
+
+    </div>
+
+    <!-- small uniform chips -->
+    <div class="mt-3 d-flex flex-wrap gap-2" id="chipsContainer">
+      <div class="category-chip" data-cat="قمصان">قمصان</div>
+      <div class="category-chip" data-cat="كم طويل">كم طويل</div>
+      <div class="category-chip" data-cat="سراويل">سراويل</div>
+      <div class="category-chip" data-cat="طقم كامل">طقم كامل</div>
+      <div class="category-chip" data-cat="مع اسم">مع اسم</div>
+      <div class="category-chip" data-cat="بدون اسم">بدون اسم</div>
+      <div class="category-chip" data-cat="رجالي">رجالي</div>
+      <div class="category-chip" data-cat="شبابي">شبابي</div>
+      <div class="category-chip" data-cat="أطفال">أطفال</div>
+    </div>
+
+  </section>
+
+  <!-- PRODUCTS -->
+  <section class="container mt-4" id="products">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h4>عرض المنتجات حسب التصنيف</h4>
+    </div>
+
+    <!-- Strip template start -->
+    <style>
+      .product-strip{display:flex;gap:1rem;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scroll-behavior:smooth;padding-bottom:8px}
+      .product-strip::-webkit-scrollbar{height:8px}
+      .product-strip::-webkit-scrollbar-thumb{background:rgba(0,0,0,.12);border-radius:8px}
+      .product-strip .product-card{flex:0 0 220px;min-width:220px;scroll-snap-align:start}
+      .strip-controls{position:absolute;top:50%;transform:translateY(-50%);z-index:30;border-radius:50%;box-shadow:0 6px 18px rgba(0,0,0,.12);width:42px;height:42px;display:flex;align-items:center;justify-content:center}
+      .strip-prev{left:-26px}
+      .strip-next{right:-26px}
+      @media (max-width:768px){.product-strip .product-card{flex:0 0 170px;min-width:170px}}
+    </style>
+
+    <!-- Categories array -->
+    <div class="category-block mb-5" data-cat="الدوري الأوروبي" id="category-الدوري-الأوروبي">
+      <div class="d-flex justify-content-between align-items-baseline mb-2">
+        <div>
+          <h5 class="mb-0">الدوري الأوروبي</h5>
+          <small class="text-muted">هنا سيتم عرض المنتجات التابعة لتصنيف الدوري الأوروبي</small>
+        </div>
+        <div class="text-end">
+          <span class="badge bg-primary">عرض 8</span>
+        </div>
+      </div>
+
+      <div class="position-relative">
+        <button class="btn btn-sm btn-light strip-controls strip-prev" data-target="strip-1" aria-label="السابق"><i class="bi bi-chevron-left"></i></button>
+        <div class="product-strip" id="strip-1">
+          <!-- sample product cards (repeat) -->
+          <div class="product-card p-2 shadow-sm">
+            <img src="https://picsum.photos/seed/euro1/400/300" alt="" class="img-fluid" data-replace="true">
+            <div class="p-2">
+              <h6 class="mb-1">قميص ريال مدريد</h6>
+              <div class="prod-desc">خامة رسمية.</div>
+              <div class="d-flex justify-content-between align-items-center mt-2">
+                <div class="fw-bold">SAR 249</div>
+                <button class="btn btn-sm btn-buy--madrid add-to-cart" data-name="قميص ريال مدريد" data-price="249">اضف الى السلة</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card p-2 shadow-sm">
+            <img src="https://picsum.photos/seed/euro2/400/300" alt="" class="img-fluid" data-replace="true">
+            <div class="p-2">
+              <h6 class="mb-1">قميص برشلونة</h6>
+              <div class="prod-desc">نسخة خفيفة.</div>
+              <div class="d-flex justify-content-between align-items-center mt-2">
+                <div class="fw-bold">SAR 229</div>
+                <button class="btn btn-sm btn-buy--barca add-to-cart" data-name="قميص برشلونة" data-price="229">اضف الى السلة</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card p-2 shadow-sm">
+            <img src="https://picsum.photos/seed/euro3/400/300" alt="" class="img-fluid" data-replace="true">
+            <div class="p-2">
+              <h6 class="mb-1">قميص بايرن</h6>
+              <div class="prod-desc">مناسب للمباريات.</div>
+              <div class="d-flex justify-content-between align-items-center mt-2">
+                <div class="fw-bold">SAR 219</div>
+                <button class="btn btn-sm btn-buy--euro add-to-cart" data-name="قميص بايرن" data-price="219">اضف الى السلة</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card p-2 shadow-sm">
+            <img src="https://picsum.photos/seed/euro4/400/300" alt="" class="img-fluid" data-replace="true">
+            <div class="p-2">
+              <h6 class="mb-1">قميص تشيلسي</h6>
+              <div class="prod-desc">خامات تنفسية.</div>
+              <div class="d-flex justify-content-between align-items-center mt-2">
+                <div class="fw-bold">SAR 199</div>
+                <button class="btn btn-sm btn-buy--euro add-to-cart" data-name="قميص تشيلسي" data-price="199">اضف الى السلة</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card p-2 shadow-sm">
+            <img src="https://picsum.photos/seed/euro5/400/300" alt="" class="img-fluid" data-replace="true">
+            <div class="p-2">
+              <h6 class="mb-1">قميص مانشستر</h6>
+              <div class="prod-desc">خامة ممتازة.</div>
+              <div class="d-flex justify-content-between align-items-center mt-2">
+                <div class="fw-bold">SAR 259</div>
+                <button class="btn btn-sm btn-buy--madrid add-to-cart" data-name="قميص مانشستر" data-price="259">اضف الى السلة</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card p-2 shadow-sm">
+            <img src="https://picsum.photos/seed/euro6/400/300" alt="" class="img-fluid" data-replace="true">
+            <div class="p-2">
+              <h6 class="mb-1">قميص خاص</h6>
+              <div class="prod-desc">إصدار محدود.</div>
+              <div class="d-flex justify-content-between align-items-center mt-2">
+                <div class="fw-bold">SAR 299</div>
+                <button class="btn btn-sm btn-buy--madrid add-to-cart" data-name="قميص خاص" data-price="299">اضف الى السلة</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <button class="btn btn-sm btn-light strip-controls strip-next" data-target="strip-1" aria-label="التالي"><i class="bi bi-chevron-right"></i></button>
+      </div>
+    </div>
+    <!-- Strip template end -->
+
+    <!-- Repeat similar block for 6 more categories (kept ids and data-cat) -->
+
+    <!-- 2 -->
+    <div class="category-block mb-5" data-cat="فرق مشهورة" id="category-فرق-مشهورة">
+      <div class="d-flex justify-content-between align-items-baseline mb-2">
+        <div>
+          <h5 class="mb-0">فرق مشهورة</h5>
+          <small class="text-muted">هنا سيتم عرض المنتجات التابعة لتصنيف فرق مشهورة</small>
+        </div>
+        <div class="text-end"><span class="badge bg-primary">عرض 6</span></div>
+      </div>
+      <div class="position-relative">
+        <button class="btn btn-sm btn-light strip-controls strip-prev" data-target="strip-2" aria-label="السابق"><i class="bi bi-chevron-left"></i></button>
+        <div class="product-strip" id="strip-2">
+          <!-- cards -->
+          <div class="product-card p-2 shadow-sm"><img src="https://picsum.photos/seed/fam1/400/300" class="img-fluid" data-replace="true"><div class="p-2"><h6 class="mb-1">قميص نجوم</h6><div class="prod-desc">تفاصيل دقيقة.</div><div class="d-flex justify-content-between align-items-center mt-2"><div class="fw-bold">SAR 239</div><button class="btn btn-sm btn-buy--euro add-to-cart" data-name="قميص نجوم" data-price="239">اضف الى السلة</button></div></div></div>
+          <div class="product-card p-2 shadow-sm"><img src="https://picsum.photos/seed/fam2/400/300" class="img-fluid" data-replace="true"><div class="p-2"><h6 class="mb-1">قميص كلاسيكي</h6><div class="prod-desc">موديل هادئ.</div><div class="d-flex justify-content-between align-items-center mt-2"><div class="fw-bold">SAR 159</div><button class="btn btn-sm btn-buy--barca add-to-cart" data-name="قميص كلاسيكي" data-price="159">اضف الى السلة</button></div></div></div>
+          <div class="product-card p-2 shadow-sm"><img src="https://picsum.photos/seed/fam3/400/300" class="img-fluid" data-replace="true"><div class="p-2"><h6 class="mb-1">قميص خاص</h6><div class="prod-desc">نسخة محدودة.</div><div class="d-flex justify-content-between align-items-center mt-2"><div class="fw-bold">SAR 289</div><button class="btn btn-sm btn-buy--madrid add-to-cart" data-name="قميص خاص" data-price="289">اضف الى السلة</button></div></div></div>
+        </div>
+        <button class="btn btn-sm btn-light strip-controls strip-next" data-target="strip-2" aria-label="التالي"><i class="bi bi-chevron-right"></i></button>
+      </div>
+    </div>
+
+    <!-- 3 -->
+    <div class="category-block mb-5" data-cat="قمصان سعودية" id="category-قمصان-سعودية">
+      <div class="d-flex justify-content-between align-items-baseline mb-2">
+        <div>
+          <h5 class="mb-0">قمصان سعودية</h5>
+          <small class="text-muted">هنا سيتم عرض المنتجات التابعة لتصنيف قمصان سعودية</small>
+        </div>
+        <div class="text-end"><span class="badge bg-success">عرض 5</span></div>
+      </div>
+      <div class="position-relative">
+        <button class="btn btn-sm btn-light strip-controls strip-prev" data-target="strip-3" aria-label="السابق"><i class="bi bi-chevron-left"></i></button>
+        <div class="product-strip" id="strip-3">
+          <div class="product-card p-2 shadow-sm"><img src="https://picsum.photos/seed/sa1/400/300" class="img-fluid" data-replace="true"><div class="p-2"><h6 class="mb-1">قميص الأهلي</h6><div class="prod-desc">خامة مناسبة للمناخ.</div><div class="d-flex justify-content-between align-items-center mt-2"><div class="fw-bold">SAR 179</div><button class="btn btn-sm btn-buy--sa add-to-cart" data-name="قميص الأهلي" data-price="179">اضف الى السلة</button></div></div></div>
+          <div class="product-card p-2 shadow-sm"><img src="https://picsum.photos/seed/sa2/400/300" class="img-fluid" data-replace="true"><div class="p-2"><h6 class="mb-1">قميص الهلال</h6><div class="prod-desc">نسخة مميزة.</div><div class="d-flex justify-content-between align-items-center mt-2"><div class="fw-bold">SAR 199</div><button class="btn btn-sm btn-buy--sa add-to-cart" data-name="قميص الهلال" data-price="199">اضف الى السلة</button></div></div></div>
+          <div class="product-card p-2 shadow-sm"><img src="https://picsum.photos/seed/sa3/400/300" class="img-fluid" data-replace="true"><div class="p-2"><h6 class="mb-1">قميص الإتفاق</h6><div class="prod-desc">خامة مريحة.</div><div class="d-flex justify-content-between align-items-center mt-2"><div class="fw-bold">SAR 149</div><button class="btn btn-sm btn-buy--sa add-to-cart" data-name="قميص الإتفاق" data-price="149">اضف الى السلة</button></div></div></div>
+        </div>
+        <button class="btn btn-sm btn-light strip-controls strip-next" data-target="strip-3" aria-label="التالي"><i class="bi bi-chevron-right"></i></button>
+      </div>
+    </div>
+
+    <!-- PROMO BANNER after 3 -->
+    <div class="col-12 my-2">
+      <div class="promo-banner shadow-sm">
+        <div>
+          <h5 class="mb-1">عرض خاص: اشترِ واحدًا واحصل على الثاني بنصف السعر</h5>
+          <div class="text-muted">الترويج يقع هنا بعد شريط التصنيف الثالث كما طلبت.</div>
+        </div>
+        <div class="text-end">
+          <button class="btn btn-outline-dark">اطلع على الشروط</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4 -->
+    <div class="category-block mb-5" data-cat="الدوري الأمريكي" id="category-الدوري-الأمريكي">
+      <div class="d-flex justify-content-between align-items-baseline mb-2">
+        <div>
+          <h5 class="mb-0">الدوري الأمريكي</h5>
+          <small class="text-muted">هنا سيتم عرض المنتجات التابعة لتصنيف الدوري الأمريكي</small>
+        </div>
+        <div class="text-end"><span class="badge bg-warning">عرض 6</span></div>
+      </div>
+      <div class="position-relative">
+        <button class="btn btn-sm btn-light strip-controls strip-prev" data-target="strip-4" aria-label="السابق"><i class="bi bi-chevron-left"></i></button>
+        <div class="product-strip" id="strip-4">
+          <div class="product-card p-2 shadow-sm"><img src="https://picsum.photos/seed/us1/400/300" class="img-fluid" data-replace="true"><div class="p-2"><h6 class="mb-1">قميص MLS</h6><div class="prod-desc">نسخة رسمية.</div><div class="d-flex justify-content-between align-items-center mt-2"><div class="fw-bold">SAR 159</div><button class="btn btn-sm btn-buy--euro add-to-cart" data-name="قميص MLS" data-price="159">اضف الى السلة</button></div></div></div>
+          <div class="product-card p-2 shadow-sm"><img src="https://picsum.photos/seed/us2/400/300" class="img-fluid" data-replace="true"><div class="p-2"><h6 class="mb-1">قميص تدريب</h6><div class="prod-desc">خفيف ومريح.</div><div class="d-flex justify-content-between align-items-center mt-2"><div class="fw-bold">SAR 99</div><button class="btn btn-sm btn-buy--euro add-to-cart" data-name="قميص تدريب" data-price="99">اضف الى السلة</button></div></div></div>
+        </div>
+        <button class="btn btn-sm btn-light strip-controls strip-next" data-target="strip-4" aria-label="التالي"><i class="bi bi-chevron-right"></i></button>
+      </div>
+    </div>
+
+    <!-- 5 -->
+    <div class="category-block mb-5" data-cat="خامات خاصة" id="category-خامات-خاصة">
+      <div class="d-flex justify-content-between align-items-baseline mb-2">
+        <div>
+          <h5 class="mb-0">خامات خاصة</h5>
+          <small class="text-muted">هنا سيتم عرض المنتجات التابعة لتصنيف الخامات الخاصة</small>
+        </div>
+        <div class="text-end"><span class="badge bg-info">عرض 4</span></div>
+      </div>
+      <div class="position-relative">
+        <button class="btn btn-sm btn-light strip-controls strip-prev" data-target="strip-5" aria-label="السابق"><i class="bi bi-chevron-left"></i></button>
+        <div class="product-strip" id="strip-5">
+          <div class="product-card p-2 shadow-sm"><img src="https://picsum.photos/seed/mat1/400/300" class="img-fluid" data-replace="true"><div class="p-2"><h6 class="mb-1">قميص قماش مميز</h6><div class="prod-desc">خامة مريحة ومطوّرة.</div><div class="d-flex justify-content-between align-items-center mt-2"><div class="fw-bold">SAR 269</div><button class="btn btn-sm btn-buy--euro add-to-cart" data-name="قميص قماش مميز" data-price="269">اضف الى السلة</button></div></div></div>
+        </div>
+        <button class="btn btn-sm btn-light strip-controls strip-next" data-target="strip-5" aria-label="التالي"><i class="bi bi-chevron-right"></i></button>
+      </div>
+    </div>
+
+    <!-- 6 -->
+    <div class="category-block mb-5" data-cat="الأطفال" id="category-الأطفال">
+      <div class="d-flex justify-content-between align-items-baseline mb-2">
+        <div>
+          <h5 class="mb-0">الأطفال</h5>
+          <small class="text-muted">هنا سيتم عرض المنتجات التابعة لتصنيف الأطفال</small>
+        </div>
+        <div class="text-end"><span class="badge bg-secondary">عرض 5</span></div>
+      </div>
+      <div class="position-relative">
+        <button class="btn btn-sm btn-light strip-controls strip-prev" data-target="strip-6" aria-label="السابق"><i class="bi bi-chevron-left"></i></button>
+        <div class="product-strip" id="strip-6">
+          <div class="product-card p-2 shadow-sm"><img src="https://picsum.photos/seed/kid1/400/300" class="img-fluid" data-replace="true"><div class="p-2"><h6 class="mb-1">قميص أطفال ملون</h6><div class="prod-desc">مقاسات للأطفال.</div><div class="d-flex justify-content-between align-items-center mt-2"><div class="fw-bold">SAR 89</div><button class="btn btn-sm btn-buy--barca add-to-cart" data-name="قميص أطفال ملون" data-price="89">اضف الى السلة</button></div></div></div>
+          <div class="product-card p-2 shadow-sm"><img src="https://picsum.photos/seed/kid2/400/300" class="img-fluid" data-replace="true"><div class="p-2"><h6 class="mb-1">قميص صغير</h6><div class="prod-desc">قماش ناعم.</div><div class="d-flex justify-content-between align-items-center mt-2"><div class="fw-bold">SAR 79</div><button class="btn btn-sm btn-buy--barca add-to-cart" data-name="قميص صغير" data-price="79">اضف الى السلة</button></div></div></div>
+        </div>
+        <button class="btn btn-sm btn-light strip-controls strip-next" data-target="strip-6" aria-label="التالي"><i class="bi bi-chevron-right"></i></button>
+      </div>
+    </div>
+
+    <!-- 7 -->
+    <div class="category-block mb-5" data-cat="الكلاسيك" id="category-الكلاسيك">
+      <div class="d-flex justify-content-between align-items-baseline mb-2">
+        <div>
+          <h5 class="mb-0">الكلاسيك</h5>
+          <small class="text-muted">هنا سيتم عرض المنتجات التابعة لتصنيف الكلاسيك</small>
+        </div>
+        <div class="text-end"><span class="badge bg-dark">عرض 4</span></div>
+      </div>
+      <div class="position-relative">
+        <button class="btn btn-sm btn-light strip-controls strip-prev" data-target="strip-7" aria-label="السابق"><i class="bi bi-chevron-left"></i></button>
+        <div class="product-strip" id="strip-7">
+          <div class="product-card p-2 shadow-sm"><img src="https://picsum.photos/seed/cla1/400/300" class="img-fluid" data-replace="true"><div class="p-2"><h6 class="mb-1">قميص كلاسيكي</h6><div class="prod-desc">لون هادئ.</div><div class="d-flex justify-content-between	align-items-center mt-2"><div class="fw-bold">SAR 149</div><button class="btn btn-sm btn-buy--barca add-to-cart" data-name="قميص كلاسيكي" data-price="149">اضف الى السلة</button></div></div></div>
+          <div class="product-card p-2 shadow-sm"><img src="https://picsum.photos/seed/cla2/400/300" class="img-fluid" data-replace="true"><div class="p-2"><h6 class="mb-1">قميص ساده</h6><div class="prod-desc">مظهر أنيق وبسيط.</div><div class="d-flex justify-content-between	align-items-center mt-2"><div class="fw-bold">SAR 119</div><button class="btn btn-sm btn-buy--euro add-to-cart" data-name="قميص ساده" data-price="119">اضف الى السلة</button></div></div></div>
+        </div>
+        <button class="btn btn-sm btn-light strip-controls strip-next" data-target="strip-7" aria-label="التالي"><i class="bi bi-chevron-right"></i></button>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- Footer -->
+  <footer class="mt-5">
+    <div class="container">
+      <div class="row gy-4">
+        <div class="col-md-4">
+          <h5 class="mb-2">مروان جول</h5>
+          <p class="">متجر رائد لقمصان الفرق العالمية في السعودية — توصيل سريع وطرق دفع آمنة.</p>
+          <div class="d-flex gap-2 align-items-center mt-2">
+            <span class="badge bg-light text-dark">ضمان إرجاع 14 يوم</span>
+            <span class="badge bg-light text-dark">شحن داخل السعودية</span>
+          </div>
+
+          <div class="mt-3">
+            <small class="d-block ">طرق الدفع المقبولة</small>
+            <div class="d-flex gap-2 align-items-center mt-2">
+              <!-- Visa SVG -->
+              <svg width="48" height="30" viewBox="0 0 40 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="40" height="24" rx="3" fill="#1A1F71"/><text x="20" y="16" fill="#fff" font-size="10" font-weight="700" text-anchor="middle">VISA</text></svg>
+              <!-- MasterCard SVG -->
+              <svg width="48" height="30" viewBox="0 0 40 24" xmlns="http://www.w3.org/2000/svg"><rect width="40" height="24" rx="3" fill="#FFFFFF" stroke="#ddd"/><circle cx="15" cy="12" r="7" fill="#EB001B"/><circle cx="24" cy="12" r="7" fill="#F79E1B"/></svg>
+              <!-- mada (Saudi) simple mark -->
+              <svg width="48" height="30" viewBox="0 0 48 30" xmlns="http://www.w3.org/2000/svg"><rect width="48" height="30" rx="3" fill="#0A8043"/><text x="24" y="19" fill="#fff" font-size="10" font-weight="700" text-anchor="middle">mada</text></svg>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-2">
+          <h6>روابط سريعة</h6>
+          <ul class="list-unstyled ">
+            <li><a href="#" class="text-decoration-none ">الأسئلة المتكررة</a></li>
+            <li><a href="#" class="text-decoration-none ">سياسة الخصوصية</a></li>
+            <li><a href="#" class="text-decoration-none ">شروط الاستخدام</a></li>
+            <li><a href="#" class="text-decoration-none ">سياسة الإرجاع</a></li>
+          </ul>
+        </div>
+
+        <div class="col-md-3">
+          <h6>خدمة العملاء</h6>
+          <div class="">متوفر من السبت إلى الخميس 9 ص - 6 م</div>
+          <div class="mt-2">
+            <div><i class="bi bi-telephone"></i> 012-3456789</div>
+            <div class="mt-1"><i class="bi bi-whatsapp"></i> <a href="https://wa.me/966123456789" class="text-decoration-none">واتساب: +966 12 345 6789</a></div>
+            <div class="mt-1"><i class="bi bi-envelope"></i> <a href="mailto:info@marwangoal.example" class="text-decoration-none">info@marwangoal.example</a></div>
+          </div>
+        </div>
+
+        <div class="col-md-3">
+          <h6>تابعنا</h6>
+          <div class="d-flex gap-2 mt-2">
+            <a class="btn btn-outline-light btn-sm" href="#"><i class="bi bi-instagram"></i></a>
+            <a class="btn btn-outline-light btn-sm" href="#"><i class="bi bi-twitter"></i></a>
+            <a class="btn btn-outline-light btn-sm" href="#"><i class="bi bi-facebook"></i></a>
+            <a class="btn btn-outline-light btn-sm" href="#"><i class="bi bi-youtube"></i></a>
+          </div>
+        </div>
+
+      </div>
+
+      <hr class="my-4">
+      <div class="d-flex justify-content-between align-items-center">
+        <div class="small ">© جميع الحقوق محفوظة لمروان جول - 2025 | سجل تجاري: 123456789</div>
+        <div class="small ">تصميم وتطوير بواسطة مروان جول</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // helper slug (safe id)
+    function slugify(text){
+      return text.replace(/\s+/g,'-').replace(/[^\u0600-\u06FF0-9a-zA-Z-]/g,'').replace(/-+/g,'-');
+    }
+
+    // IMAGE REPLACEMENT: قائمة الصور البديلة (الموصى به أن تكون هذه الملفات متاحة في نفس مسار المشروع)
+    const replacementImages = [
+      'b1-removebg-preview.png',
+      'b2-removebg-preview.png',
+      'b3-removebg-preview.png',
+      'b4-removebg-preview.png',
+      'b5-removebg-preview.png',
+      'b6-removebg-preview.png',
+      'b7-removebg-preview.png',
+      'b8-removebg-preview.png'
+    ];
+
+    // اختر عنصر عشوائي من المصفوفة
+    function pickRandom(arr){ return arr[Math.floor(Math.random()*arr.length)]; }
+
+    document.addEventListener('DOMContentLoaded',function(){
+      const TARGET = 18; // عدد العناصر المرغوب به لكل شريط
+      document.querySelectorAll('.product-strip').forEach(strip=>{
+        const items = Array.from(strip.children);
+        if(items.length===0) return;
+        let i=0;
+        while(strip.children.length < TARGET){
+          const clone = items[i % items.length].cloneNode(true);
+          strip.appendChild(clone);
+          i++;
+        }
+      });
+
+      // strip navigation buttons behavior
+      document.querySelectorAll('.strip-controls').forEach(btn=>{
+        btn.addEventListener('click',function(e){
+          const targetId = this.getAttribute('data-target');
+          const strip = document.getElementById(targetId);
+          if(!strip) return;
+          const card = strip.querySelector('.product-card');
+          const cardW = card ? card.getBoundingClientRect().width + 16 : 220; // include gap
+          if(this.classList.contains('strip-next')){ // next -> scroll left
+            strip.scrollBy({left: cardW, behavior:'smooth'});
+          } else {
+            strip.scrollBy({left: -cardW, behavior:'smooth'});
+          }
+        });
+      });
+
+      // minor hover for buy buttons
+      document.querySelectorAll('[class*=btn-buy]').forEach(btn=>{
+        btn.addEventListener('mouseenter',()=>btn.style.transform='translateY(-3px)');
+        btn.addEventListener('mouseleave',()=>btn.style.transform='translateY(0)');
+      });
+
+      // CART logic
+      const cartBtn = document.getElementById('cartBtn');
+      const cartCountEl = document.getElementById('cartCount');
+      let cartCount = 0;
+
+      function updateCartBadge(){
+        cartCountEl.textContent = cartCount;
+        cartCountEl.classList.toggle('d-none', cartCount===0);
+      }
+      updateCartBadge();
+
+      // Add to cart buttons
+      function flashButton(btn){
+        const original = btn.innerHTML;
+        btn.disabled = true;
+        btn.innerHTML = 'تم الإضافة ✓';
+        setTimeout(()=>{ btn.disabled=false; btn.innerHTML = original; },1200);
+      }
+
+      document.querySelectorAll('.add-to-cart').forEach(btn=>{
+        btn.addEventListener('click',function(e){
+          e.preventDefault();
+          cartCount++;
+          updateCartBadge();
+          flashButton(this);
+          // small animation: briefly bump cart
+          cartBtn.animate([{transform:'scale(1)'},{transform:'scale(1.08)'},{transform:'scale(1)'}],{duration:220});
+        });
+      });
+
+      // hero CTA adds a sample product to cart
+      document.querySelectorAll('.hero-cta').forEach(h=>{
+        h.addEventListener('click',function(){ cartCount++; updateCartBadge(); cartBtn.animate([{transform:'scale(1)'},{transform:'scale(1.08)'},{transform:'scale(1)'}],{duration:220}); });
+      });
+
+      // CHIPS interaction: scroll to matching category, or create one if missing
+      const chips = document.querySelectorAll('.category-chip');
+      chips.forEach(chip=>{
+        chip.addEventListener('click',function(){
+          const name = this.getAttribute('data-cat') || this.textContent.trim();
+          // set active state
+          chips.forEach(c=>c.classList.remove('active'));
+          this.classList.add('active');
+
+          // try to find existing category-block with matching data-cat
+          const selector = `.category-block[data-cat\\="${CSS.escape(name)}"]`;
+          let target = document.querySelector(selector);
+          if(target){
+            // scroll to it smoothly
+            target.scrollIntoView({behavior:'smooth', block:'start'});
+            return;
+          }
+
+          // if not found: create a new simple category-block similar to others
+          const safeId = 'category-' + slugify(name);
+          // find last category block to insert before footer
+          const container = document.getElementById('categories');
+          const newBlock = document.createElement('div');
+          newBlock.className = 'category-block mb-5';
+          newBlock.setAttribute('data-cat', name);
+          newBlock.id = safeId;
+
+          // create inner HTML (minimal but matching structure)
+          const newStripId = 'strip-' + Math.floor(Math.random()*10000 + 100);
+          newBlock.innerHTML = `\n            <div class="d-flex justify-content-between align-items-baseline mb-2">\n              <div>\n                <h5 class="mb-0">${name}</h5>\n                <small class="text-muted">منتجات ضمن تصنيف ${name}</small>\n              </div>\n              <div class="text-end"><span class="badge bg-secondary">عرض 0</span></div>\n            </div>\n            <div class="position-relative">\n              <button class="btn btn-sm btn-light strip-controls strip-prev" data-target="${newStripId}" aria-label="السابق"><i class="bi bi-chevron-left"></i></button>\n              <div class="product-strip" id="${newStripId}">\n                <div class="product-card p-2 shadow-sm">\n                  <img src="https://picsum.photos/seed/${encodeURIComponent(name)}/400/300" class="img-fluid" data-replace="true">\n                  <div class="p-2">\n                    <h6 class="mb-1">منتج ${name}</h6>\n                    <div class="prod-desc">وصف مؤقت.</div>\n                    <div class="d-flex justify-content-between align-items-center mt-2">\n                      <div class="fw-bold">SAR 0</div>\n                      <button class="btn btn-sm btn-buy--euro add-to-cart" data-name="منتج ${name}" data-price="0">اضف الى السلة</button>\n                    </div>\n                  </div>\n                </div>\n              </div>\n              <button class="btn btn-sm btn-light strip-controls strip-next" data-target="${newStripId}" aria-label="التالي"><i class="bi bi-chevron-right"></i></button>\n            </div>\n          `;
+
+          // append and then fill strips and wire events for the new strip
+          container.appendChild(newBlock);
+
+          // re-run fill logic for the new strip
+          const strip = document.getElementById(newStripId);
+          if(strip){
+            const items = Array.from(strip.children);
+            let i=0;
+            while(strip.children.length < TARGET && items.length>0){
+              const clone = items[i % items.length].cloneNode(true);
+              strip.appendChild(clone);
+              i++;
+            }
+          }
+
+          // wire up the newly added add-to-cart button and strip controls
+          newBlock.querySelectorAll('.add-to-cart').forEach(btn=>{
+            btn.addEventListener('click',function(e){ e.preventDefault(); cartCount++; updateCartBadge(); flashButton(this); cartBtn.animate([{transform:'scale(1)'},{transform:'scale(1.08)'},{transform:'scale(1)'}],{duration:220}); });
+          });
+          newBlock.querySelectorAll('.strip-controls').forEach(btn=>{
+            btn.addEventListener('click',function(e){
+              const targetId = this.getAttribute('data-target');
+              const s = document.getElementById(targetId);
+              if(!s) return;
+              const card = s.querySelector('.product-card');
+              const cardW = card ? card.getBoundingClientRect().width + 16 : 220;
+              if(this.classList.contains('strip-next')) s.scrollBy({left: cardW, behavior:'smooth'}); else s.scrollBy({left: -cardW, behavior:'smooth'});
+            });
+          });
+
+          // scroll to the newly created block
+          newBlock.scrollIntoView({behavior:'smooth', block:'start'});
+        });
+      });
+
+      // ensure dynamically cloned strips also get add-to-cart wired when clones are created (mutation observer)
+      const observer = new MutationObserver(muts=>{
+        muts.forEach(m=>{
+          m.addedNodes.forEach(n=>{
+            if(n.nodeType===1 && n.matches('.product-card')){
+              const btn = n.querySelector('.add-to-cart');
+              if(btn && !btn._wired){
+                btn.addEventListener('click',function(e){ e.preventDefault(); cartCount++; updateCartBadge(); flashButton(this); cartBtn.animate([{transform:'scale(1)'},{transform:'scale(1.08)'},{transform:'scale(1)'}],{duration:220}); });
+                btn._wired = true;
+              }
+            }
+          });
+        });
+      });
+
+      document.querySelectorAll('.product-strip').forEach(s=>observer.observe(s,{childList:true}));
+
+      /* --------- IMAGE/BG replacement (kept, but modified so HERO remains as-original) --------- */
+
+      // 1) Replace only <img data-replace="true"> src attributes with random picks
+      document.querySelectorAll('img[data-replace]').forEach(img=>{
+        const rand = pickRandom(replacementImages);
+        img.src = rand;
+      });
+
+      // 2) Replace inline background-image only for elements explicitly marked with data-replace-bg (keeps hero's original backgrounds)
+      document.querySelectorAll('[data-replace-bg]').forEach(el=>{
+        const rand = pickRandom(replacementImages);
+        el.style.backgroundImage = `url("${rand}")`;
+      });
+
+      // 3) Replace images that come from picsum.photos (fallback for any picsum usage)
+      document.querySelectorAll('img').forEach(img=>{
+        const src = img.getAttribute('src') || '';
+        if(src.includes('picsum.photos')){
+          img.src = pickRandom(replacementImages);
+        }
+      });
+
+      /* ----------------------------------------------------------------------------------------------- */
+
+    });
+  </script>
+</body>
+</html>
